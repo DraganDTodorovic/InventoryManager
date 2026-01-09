@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         store = new Store();
 
-        setTitle("MiniStore");
+        setTitle("Prodavnica");
         setSize(600, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
