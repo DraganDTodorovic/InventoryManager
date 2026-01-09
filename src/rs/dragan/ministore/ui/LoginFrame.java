@@ -23,11 +23,11 @@ public class LoginFrame extends JFrame {
     private void initUI() {
         setLayout(new GridLayout(3, 2));
 
-        add(new JLabel("Username:"));
+        add(new JLabel("Korisničko ime:"));
         usernameField = new JTextField();
         add(usernameField);
 
-        add(new JLabel("Password:"));
+        add(new JLabel("Lozinka:"));
         passwordField = new JPasswordField();
         add(passwordField);
 
