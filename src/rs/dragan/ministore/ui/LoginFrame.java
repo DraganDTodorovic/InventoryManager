@@ -12,7 +12,7 @@ public class LoginFrame extends JFrame {
     private UserService userService = new UserService();
 
     public LoginFrame() {
-        setTitle("Login");
+        setTitle("Uloguj se");
         setSize(300, 180);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
