@@ -50,5 +50,22 @@ public class UserService {
         }
         return false;
     }
+
+    public ArrayList<User> getAllUsers() {
+        return users;
+    }
+
+    public boolean addUser(String username, String password) {
+        for (User u : users) {
+            if (u.getUsername().equalsIgnoreCase(username)) {
+                return false; // već postoji
+            }
+        }
+
+        users.add(new User(username, password));
+        save();
+        return true;
+    }
+
 }
 

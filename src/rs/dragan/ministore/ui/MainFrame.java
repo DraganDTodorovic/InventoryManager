@@ -34,7 +34,9 @@ public class MainFrame extends JFrame {
         JButton addButton = new JButton("Dodaj");
         JButton deleteButton = new JButton("Obriši");
         JButton refreshButton = new JButton("Osveži");
+        JButton adminButton = new JButton("Admin");
 
+        adminButton.addActionListener(e -> new AdminFrame().setVisible(true));
         addButton.addActionListener(e -> addProduct());
         deleteButton.addActionListener(e -> deleteProduct());
         refreshButton.addActionListener(e -> loadProducts());
@@ -43,6 +45,7 @@ public class MainFrame extends JFrame {
         bottomPanel.add(addButton);
         bottomPanel.add(deleteButton);
         bottomPanel.add(refreshButton);
+        bottomPanel.add(adminButton);
 
         add(scrollPane, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
