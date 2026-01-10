@@ -44,13 +44,18 @@ public class UserService {
     }
 
     public User login(String username, String password) {
+
+        String uInput = username.trim().toLowerCase();
+
         for (User u : users) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                return u; // vraćamo ceo objekat
+            if (u.getUsername().trim().toLowerCase().equals(uInput)
+                    && u.getPassword().equals(password)) {
+                return u;
             }
         }
         return null;
     }
+
 
 
     public ArrayList<User> getAllUsers() {
@@ -58,13 +63,18 @@ public class UserService {
     }
 
     public boolean addUser(String username, String password, Role role) {
+
+        String newUsername = username.trim().toLowerCase();
+
         for (User u : users) {
-            if (u.getUsername().equalsIgnoreCase(username)) {
-                return false;
+            String existing = u.getUsername().trim().toLowerCase();
+
+            if (existing.equals(newUsername)) {
+                return false; // već postoji
             }
         }
 
-        users.add(new User(username, password, role));
+        users.add(new User(username.trim(), password, role));
         save();
         return true;
     }
