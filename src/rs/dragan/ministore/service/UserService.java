@@ -1,5 +1,6 @@
 package rs.dragan.ministore.service;
 
+import rs.dragan.ministore.model.Role;
 import rs.dragan.ministore.model.User;
 
 import java.io.*;
@@ -14,8 +15,8 @@ public class UserService {
         load();
         if (users.isEmpty()) {
             // default admin
-            users.add(new User("admin", "admin"));
-            save();
+            users.add(new User("admin", "admin", Role.ADMIN));
+
         }
     }
 
@@ -42,30 +43,32 @@ public class UserService {
         }
     }
 
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         for (User u : users) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                return true;
+                return u; // vraćamo ceo objekat
             }
         }
-        return false;
+        return null;
     }
+
 
     public ArrayList<User> getAllUsers() {
         return users;
     }
 
-    public boolean addUser(String username, String password) {
+    public boolean addUser(String username, String password, Role role) {
         for (User u : users) {
             if (u.getUsername().equalsIgnoreCase(username)) {
-                return false; // već postoji
+                return false;
             }
         }
 
-        users.add(new User(username, password));
+        users.add(new User(username, password, role));
         save();
         return true;
     }
+
 
 }
 

@@ -1,5 +1,6 @@
 package rs.dragan.ministore.ui;
 
+import rs.dragan.ministore.model.User;
 import rs.dragan.ministore.service.UserService;
 
 import javax.swing.*;
@@ -44,11 +45,12 @@ public class LoginFrame extends JFrame {
     private void login() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
-
-        if (userService.login(username, password)) {
+        User user = userService.login(username, password);
+        if (user != null) {
             JOptionPane.showMessageDialog(this, "Uspešan login!");
             dispose(); // zatvori login
-            new MainFrame().setVisible(true); // otvori aplikaciju
+            new MainFrame(user).setVisible(true);
+
         } else {
             JOptionPane.showMessageDialog(this, "Pogrešan username ili password!");
         }

@@ -1,5 +1,6 @@
 package rs.dragan.ministore.ui;
 
+import rs.dragan.ministore.model.Role;
 import rs.dragan.ministore.model.User;
 import rs.dragan.ministore.service.UserService;
 
@@ -49,10 +50,13 @@ public class AdminFrame extends JFrame {
     private void addUser() {
         JTextField usernameField = new JTextField();
         JPasswordField passwordField = new JPasswordField();
+        JComboBox<Role> roleBox = new JComboBox<>(Role.values());
+
 
         Object[] message = {
                 "Username:", usernameField,
-                "Password:", passwordField
+                "Password:", passwordField,
+                "Role:", roleBox
         };
 
         int option = JOptionPane.showConfirmDialog(this, message, "Add user", JOptionPane.OK_CANCEL_OPTION);
@@ -60,13 +64,15 @@ public class AdminFrame extends JFrame {
         if (option == JOptionPane.OK_OPTION) {
             String u = usernameField.getText();
             String p = new String(passwordField.getPassword());
+            Role role = (Role) roleBox.getSelectedItem();
+            boolean ok = userService.addUser(u, p, role);
 
             if (u.isBlank() || p.isBlank()) {
                 JOptionPane.showMessageDialog(this, "Polja ne smeju biti prazna!");
                 return;
             }
 
-            boolean ok = userService.addUser(u, p);
+            ok = userService.addUser(u, p, role);
 
             if (ok) {
                 JOptionPane.showMessageDialog(this, "Korisnik dodat!");

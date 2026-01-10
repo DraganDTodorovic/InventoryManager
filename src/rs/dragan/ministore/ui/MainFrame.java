@@ -1,6 +1,8 @@
 package rs.dragan.ministore.ui;
 
 import rs.dragan.ministore.model.Product;
+import rs.dragan.ministore.model.Role;
+import rs.dragan.ministore.model.User;
 import rs.dragan.ministore.service.Store;
 
 import javax.swing.*;
@@ -12,8 +14,11 @@ public class MainFrame extends JFrame {
     private Store store;
     private JTable table;
     private DefaultTableModel tableModel;
+    private User loggedUser;
 
-    public MainFrame() {
+
+    public MainFrame(User user) {
+        this.loggedUser = user;
         store = new Store();
 
         setTitle("Prodavnica");
@@ -35,6 +40,10 @@ public class MainFrame extends JFrame {
         JButton deleteButton = new JButton("Obriši");
         JButton refreshButton = new JButton("Osveži");
         JButton adminButton = new JButton("Admin");
+        if (loggedUser.getRole() != Role.ADMIN) {
+            adminButton.setEnabled(false); // ili setVisible(false)
+        }
+
 
         adminButton.addActionListener(e -> new AdminFrame().setVisible(true));
         addButton.addActionListener(e -> addProduct());
